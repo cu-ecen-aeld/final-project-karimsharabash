@@ -1,0 +1,19 @@
+/dts-v1/;
+    /plugin/;
+
+    / {
+        compatible = "brcm,bcm2708"; 
+
+        fragment@0 {
+            target = <&spi0>;
+            __overlay__ {
+                status = "okay"; // Ensure the SPI bus is enabled
+                
+                mcp3008@0 {
+                    compatible = "viewtool,vt-spi-mcp3008";
+                    reg = <0>; // Chip Select 0 (CE0)
+                    spi-max-frequency = <1000000>;
+                };
+            };
+        };
+    };
