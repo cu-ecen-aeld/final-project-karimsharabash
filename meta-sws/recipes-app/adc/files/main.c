@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
     int raw_value = read_adc_channel(fd, channel);
 
     if (raw_value != -1) {
-        printf("--- MCP3008 ADC Readout ---\n");
+/*        printf("--- MCP3008 ADC Readout ---\n");
         printf("Device: %s\n", device);
         printf("Channel: %d\n", channel);
         printf("Raw 10-bit ADC Value: %d (Max 1023)\n", raw_value);
@@ -147,6 +147,10 @@ int main(int argc, char *argv[]) {
                (raw_value > 700) ? "DRY (Needs Water)" : 
                (raw_value > 300) ? "MOIST (Optimal)" : 
                "WET (Saturated)");
+               */
+               
+        printf("%d\n", raw_value);
+        fflush(stdout);
     }
 
     // --- 3. Clean up ---
