@@ -6,3 +6,7 @@ https://github.com/cu-ecen-aeld/final-project-karimsharabash/wiki/Smart-Watering
 ## Schedule Page
 
 https://github.com/users/karimsharabash/projects/1/views/1
+
+## Sprints Page
+
+https://github.com/cu-ecen-aeld/final-project-karimsharabash/wiki/Sprints
