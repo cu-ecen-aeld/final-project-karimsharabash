@@ -6,11 +6,12 @@
 #define ADC_DEVICE   "/dev/spidev0.0"
 #define ADC_CHANNEL  0
 
-#define DRY_THRESH   400
-#define WET_THRESH   450
+#define DRY_THRESH   500
+#define WET_THRESH   550
 
-#define INTERVAL_S         5
-#define TRIAL_INTERVAL_S   1
+#define ADC_TRIAL_INTERVAL   1
+#define PUMP_TRIAL_INTERVAL  2
+#define WET_INTERVAL         10
 
 static int pump_on = 0;
 
@@ -79,12 +80,12 @@ int main(void)
         moisture = read_adc();
         if (moisture < 0) {
             printf("[sws] ADC read failed\n");
-            sleep(INTERVAL_S);
+            sleep(ADC_TRIAL_INTERVAL);
             continue;
         }
         if (moisture < 10) {
             printf("[sws] Skip the noise\n");
-            sleep(TRIAL_INTERVAL_S);
+            sleep(ADC_TRIAL_INTERVAL);
             continue;
         }
 
@@ -92,13 +93,14 @@ int main(void)
 
         if (!pump_on && moisture < DRY_THRESH)
             pump_on_cmd();
-            sleep(TRIAL_INTERVAL_S);
-            pump_off_cmd();
+            //sleep(PUMP_TRIAL_INTERVAL);
+            //pump_off_cmd();
 
         if (pump_on && moisture > WET_THRESH)
             pump_off_cmd();
+            sleep(PUMP_TRIAL_INTERVAL);
 
-        sleep(INTERVAL_S);
+        sleep(ADC_TRIAL_INTERVAL);
     }
 
     return 0;
